@@ -1,0 +1,11 @@
+scrape_configs:
+  - job_name: 'node-exporter'
+    dns_sd_configs:
+      - names:
+          - 'tasks.node-exporter'
+        type: 'A'
+        port: 9100
+    relabel_configs:
+      - source_labels: ['__meta_docker_node_id']  # Docker Swarm Node ID 메타데이터
+        target_label: 'instance'
+
